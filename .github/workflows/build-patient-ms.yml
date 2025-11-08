@@ -56,7 +56,8 @@ jobs:
       working-directory: ${{ github.event.inputs.app_name }}
       run: |
         pwd
-        docker build -t patient-ms . 
+        if [[ "${{ github.event.inputs.app_name }}" == "patient-ms/src" ]]; then 
+          docker build -t patient-ms . 
 
     - name: Log in to AWS ECR
       uses: aws-actions/amazon-ecr-login@v1
@@ -69,4 +70,9 @@ jobs:
           docker tag patient-ms:latest ${{ secrets.ECR_PATIENT_URI  }}:latest
           #docker push 314146291166.dkr.ecr.ap-south-1.amazonaws.com/dev-patient-repo:latest
           docker push ${{ secrets.ECR_PATIENT_URI }}:latest
+          elif [[ "${{ github.event.inputs.app_name }}" == "application-ms/src" ]]; then 
+          docker tag ms-app:latest ${{ secrets.ECR_ADMIN_URI  }}:${{ github.sha }}
+          docker tag ms-app:latest ${{ secrets.ECR_ADMIN_URI  }}:latest
+          docker push ${{ secrets.ECR_ADMIN_URI }}:latest
+          docker push ${{ secrets.ECR_ADMIN_URI }}:${{ github.sha }}
         fi
