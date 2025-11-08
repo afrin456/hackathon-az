@@ -16,7 +16,7 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - name: Checkout Code
-       uses: actions/checkout@v2
+       uses: actions/checkout@v3
      # - name: Configure AWS Credentials
      #   uses: aws-actions/configure-aws-credentials@v1
      #   with:
@@ -30,5 +30,6 @@ jobs:
        working-directory: ${{ github.event.inputs.manifest_directory }}
        run: |
          aws eks update-kubeconfig --region ap-south-1 --name my-cluster
+         ls
          kubectl apply -f patient-deploy.yaml
          kubectl apply -f patient-svc.yaml
