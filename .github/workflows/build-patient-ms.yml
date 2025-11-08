@@ -52,10 +52,10 @@ jobs:
 
     
     - name: Build Docker image
-      working-directory: ../patient-ms/src/ 
+      # working-directory: ../patient-ms/src/ 
       run: |
         
-        docker build -t ms-patient .
+        docker build -t ms-patient ../patient-ms/src/dockerfile 
 
     - name: Tag Docker image & Push
       working-directory: ../patient-ms/src/ 
