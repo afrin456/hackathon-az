@@ -35,19 +35,7 @@ jobs:
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
-    - name: check repo
-      run: ls -lrt && pwd
-    # - name: Azure Login
-    #   uses: Azure/login@v2.3.0
-    #   with:
-    #     # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-    #     #creds: CLIENT_ID
-    #     # ClientId of the Azure Service principal created.
-    #     client-id: CLIENT_ID
-    #     # TenantId of the Azure Service principal created.
-    #     tenant-id: TENANT_ID
-    #     # Azure subscriptionId
-    #     subscription-id: SUB_ID
+
         
            
 
