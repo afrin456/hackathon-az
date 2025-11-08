@@ -6,7 +6,7 @@ terraform {
     dynamodb_table = "terraform-locks"
     encrypt        = true
   }
-   required_version = "~> 1.5.8"
+   required_version = "1.5.9"
 }
 
 provider "aws" {
