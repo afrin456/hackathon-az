@@ -52,13 +52,13 @@ jobs:
 
     
     - name: Build Docker image
-      working-directory: patient-ms/src/ 
+      working-directory: ../patient-ms/src/ 
       run: |
         
         docker build -t ms-patient .
 
     - name: Tag Docker image & Push
-      working-directory: ../../patient-ms/src/ 
+      working-directory: ../patient-ms/src/ 
       run: |
         if [[ "${{ github.event.inputs.app_name }}" == "patient" ]]; then 
           docker tag ms-app:latest ${{ secrets.ACR_PATIENT_URI }}:${{ github.sha }}
