@@ -29,6 +29,6 @@ jobs:
      - name: Deploy to EKS
        working-directory: ${{ github.event.inputs.manifest_directory }}
        run: |
-         aws eks update-kubeconfig --name my-cluster
+         aws eks update-kubeconfig --name my-cluster --region ap-south-1
          kubectl apply -f patient-deploy.yaml
          kubectl apply -f patient-svc.yaml
