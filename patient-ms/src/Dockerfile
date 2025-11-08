@@ -11,5 +11,6 @@ COPY . .
 # Expose the application port
 EXPOSE 3000
 
+
 # Command to run node.js in a docker container
 CMD ["node", "index.js"]
