@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: patient-app-deployment
+spec:
+ replicas: 2
+ selector:
+   matchLabels:
+     app: patient-app
+ template:
+   metadata:
+     labels:
+       app: patient-app
+   spec:
+     containers:
+     - name: patient-container
+       image: 314146291166.dkr.ecr.ap-south-1.amazonaws.com/dev-patient-repo:latest
+       ports:
+       - containerPort: 3000
+       resources:
+         limits:
+           memory: "256Mi"
+           cpu: "500m"
+         requests:
+           memory: "128Mi"
+           cpu: "250m"

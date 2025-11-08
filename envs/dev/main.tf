@@ -1,11 +1,12 @@
 terraform {
   backend "s3" {
-    bucket         = "tf-state-bucket"
+    bucket         = "tf-state-bucket-ms-999"
     key            = "dev/terraform.tfstate"
     region         = "ap-south-1"
     dynamodb_table = "terraform-locks"
     encrypt        = true
   }
+
 }
 
 provider "aws" {
@@ -13,7 +14,7 @@ provider "aws" {
 }
 
 module "network" {
-  source = "../../modules/vpc"
+  source = "../../modules/network"
   env    = "dev"
 
   vpc_cidr           = "10.0.0.0/16"
@@ -26,6 +27,15 @@ module "ecr" {
   source = "../../modules/ecr"
   env    = "dev"
 }
+
+module "eks" {
+  source = "../../modules/eks"
+  env    = "dev"
+  vpc_id         = module.network.vpc_id
+ public_subnets = module.network.public_subnets
+ private_subnets = module.network.private_subnets
+}
+
 
 
 

@@ -12,7 +12,7 @@ on:
       app_name:
         description: 'Name of the app to build'
         required: true
-        default: 'patient'
+        default: 'patient-ms/src'
 
 env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -30,7 +30,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-   
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
@@ -40,16 +41,26 @@ jobs:
 
     
     - name: Build Docker image
-      working-directory: patient-ms/src
-      run:  ls && pwd && docker build -t ms-patient . 
+      working-directory: ${{ github.event.inputs.app_name }}
+      run: |
+        pwd
+        if [[ "${{ github.event.inputs.app_name }}" == "patient-ms/src" ]]; then 
+          docker build -t patient-ms . 
 
     - name: Log in to AWS ECR
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Tag Docker image & Push
-      working-directory: ../patient-ms/src/ 
+      working-directory: ${{ github.event.inputs.app_name }} 
       run: |
-        if [[ "${{ github.event.inputs.app_name }}" == "patient" ]]; then 
-          docker tag ms-app:latest ${{ secrets.ACR_PATIENT_URI }}:${{ github.sha }}
-          docker tag ms-app:latest ${{ secrets.ACR_PATIENT_URI  }}:latest
-          docker push ${{ secrets.ACR_PATIENT_URI }}:latest
+        if [[ "${{ github.event.inputs.app_name }}" == "patient-ms/src" ]]; then 
+          docker tag patient-ms:latest ${{ secrets.ECR_PATIENT_URI }}:${{ github.sha }}
+          docker tag patient-ms:latest ${{ secrets.ECR_PATIENT_URI  }}:latest
+          #docker push 314146291166.dkr.ecr.ap-south-1.amazonaws.com/dev-patient-repo:latest
+          docker push ${{ secrets.ECR_PATIENT_URI }}:latest
+          elif [[ "${{ github.event.inputs.app_name }}" == "application-ms/src" ]]; then 
+          docker tag ms-app:latest ${{ secrets.ECR_ADMIN_URI  }}:${{ github.sha }}
+          docker tag ms-app:latest ${{ secrets.ECR_ADMIN_URI  }}:latest
+          docker push ${{ secrets.ECR_ADMIN_URI }}:latest
+          docker push ${{ secrets.ECR_ADMIN_URI }}:${{ github.sha }}
+        fi
