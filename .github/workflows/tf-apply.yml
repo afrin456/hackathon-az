@@ -6,7 +6,7 @@ on:
       tf_directory:
         description: 'Terraform directory (e.g. infra/, terraform/dev)'
         required: true
-        default: 'environments/dev'
+        default: 'envs/dev'
       create:
         description: 'Destroy?'
         required: true
