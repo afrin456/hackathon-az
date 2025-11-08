@@ -9,11 +9,17 @@ resource "aws_s3_bucket" "tf_state" {
     prevent_destroy = true
   }
 }
-resource "aws_s3_bucket_versioning" "versioning_example" {
+resource "aws_s3_bucket_acl" "s3_acl" {
+  bucket = aws_s3_bucket.tf_state.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_versioning" "versioning" {
   bucket = aws_s3_bucket.tf_state.id
   versioning_configuration {
     status = "Enabled"
   }
+}
 
 # resource "aws_dynamodb_table" "tf_locks" {
 #   name         = "terraform-locks"
