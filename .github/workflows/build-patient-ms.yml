@@ -65,6 +65,6 @@ jobs:
       working-directory: ${{ github.event.inputs.app_name }} 
       run: |
         if [[ "${{ github.event.inputs.app_name }}" == "patient-ms/src" ]]; then 
-          docker tag patient-ms:latest ${{ secrets.ACR_PATIENT_URI }}:${{ github.sha }}
-          docker tag patient-ms:latest ${{ secrets.ACR_PATIENT_URI  }}:latest
-          docker push ${{ secrets.ACR_PATIENT_URI }}:latest
+          docker tag patient-ms:latest ${{ secrets.ECR_PATIENT_URI }}:${{ github.sha }}
+          docker tag patient-ms:latest ${{ secrets.ECR_PATIENT_URI  }}:latest
+          docker push ${{ secrets.ECR_PATIENT_URI }}:latest
