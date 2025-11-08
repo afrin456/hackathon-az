@@ -31,5 +31,5 @@ jobs:
        run: |
          aws eks update-kubeconfig --region ap-south-1 --name my-cluster
          ls
-         kubectl apply -f patient-deploy.yaml
-         kubectl apply -f patient-svc.yaml
+         kubectl apply -f patient-deploy.yml
+         kubectl apply -f patient-svc.yml
