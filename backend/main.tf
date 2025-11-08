@@ -4,20 +4,11 @@ provider "aws" {
 
 resource "aws_s3_bucket" "tf_state" {
   bucket = "tf-state-bucket-ms-999"
-
+  versioning {
+    enabled = true
+  }
   lifecycle {
     prevent_destroy = true
-  }
-}
-resource "aws_s3_bucket_acl" "s3_acl" {
-  bucket = aws_s3_bucket.tf_state.id
-  acl    = "private"
-}
-
-resource "aws_s3_bucket_versioning" "versioning" {
-  bucket = aws_s3_bucket.tf_state.id
-  versioning_configuration {
-    status = "Enabled"
   }
 }
 
