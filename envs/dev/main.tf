@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 module "network" {
-  source = "../../modules/network"
+  source = "../../modules/vpc"
   env    = "dev"
 
   vpc_cidr           = "10.0.0.0/16"
