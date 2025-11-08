@@ -30,7 +30,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-   
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
@@ -61,7 +62,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Tag Docker image & Push
-      working-directory: ../patient-ms/src/ 
+      working-directory: ${{ github.event.inputs.app_name }} 
       run: |
         if [[ "${{ github.event.inputs.app_name }}" == "patient" ]]; then 
           docker tag ms-app:latest ${{ secrets.ACR_PATIENT_URI }}:${{ github.sha }}
