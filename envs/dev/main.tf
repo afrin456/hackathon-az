@@ -6,6 +6,7 @@ terraform {
     dynamodb_table = "terraform-locks"
     encrypt        = true
   }
+ 
 }
 
 provider "aws" {
@@ -13,7 +14,7 @@ provider "aws" {
 }
 
 module "network" {
-  source = "../../modules/vpc"
+  source = "../../modules/network"
   env    = "dev"
 
   vpc_cidr           = "10.0.0.0/16"
