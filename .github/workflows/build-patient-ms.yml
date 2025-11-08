@@ -55,7 +55,7 @@ jobs:
       # working-directory: ../patient-ms/src/ 
       run: |
         pwd
-        cd patient-ms && ls && pwd 
+        cd ../patient-ms && ls && pwd 
       #ls && pwd && docker build -t ms-patient . 
 
     - name: Log in to AWS ECR
