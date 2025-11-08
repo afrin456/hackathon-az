@@ -41,9 +41,7 @@ jobs:
     
     - name: Build Docker image
       working-directory: patient-ms/src
-      run: |
-        
-         ls && pwd && docker build -t ms-patient . 
+      run:  ls && pwd && docker build -t ms-patient . 
 
     - name: Log in to AWS ECR
       uses: aws-actions/amazon-ecr-login@v1
