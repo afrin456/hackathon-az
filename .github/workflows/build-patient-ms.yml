@@ -36,7 +36,7 @@ jobs:
       uses: Azure/login@v2.3.0
       with:
         # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-        creds: CLIENT_ID
+        #creds: CLIENT_ID
         # ClientId of the Azure Service principal created.
         client-id: CLIENT_ID
         # TenantId of the Azure Service principal created.
@@ -48,12 +48,13 @@ jobs:
 
     
     - name: Build Docker image
-      #working-directory:  
+      working-directory: ../../patient-ms/src/ 
       run: |
         
         docker build -t ms-patient .
 
     - name: Tag Docker image & Push
+      working-directory: ../../patient-ms/src/ 
       run: |
         if [[ "${{ github.event.inputs.app_name }}" == "patient" ]]; then 
           docker tag ms-app:latest ${{ secrets.ACR_PATIENT_URI }}:${{ github.sha }}
