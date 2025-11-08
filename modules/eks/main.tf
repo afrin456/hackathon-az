@@ -33,7 +33,7 @@ module "eks" {
       #ami_type       = "ami-0c55b159cbfafe1f0"
       instance_types = ["t2.micro"]
 
-      min_size     = 2
+      min_size     = 4
       max_size     = 10
       desired_size = 4
     }
