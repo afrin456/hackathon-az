@@ -55,7 +55,7 @@ jobs:
       # working-directory: ../patient-ms/src/ 
       run: |
         
-        docker build -t ms-patient ../patient-ms/src/dockerfile 
+        cd patient-ms/src && ls && docker build -t ms-patient . 
 
     - name: Tag Docker image & Push
       working-directory: ../patient-ms/src/ 
