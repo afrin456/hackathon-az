@@ -69,3 +69,4 @@ jobs:
           # docker tag patient-ms:latest ${{ secrets.ECR_PATIENT_URI  }}:latest
           docker push 314146291166.dkr.ecr.ap-south-1.amazonaws.com/dev-patient-repo:latest
           #docker push ${{ secrets.ECR_PATIENT_URI }}:latest
+        fi
